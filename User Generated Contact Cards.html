@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <title>User Generated Contact Cards</title>
+    <style type="text/css">
+        
+        form {width: 340px;
+            display: inline-block;
+            /* margin-left: 100px; */
+            vertical-align: bottom;
+        } 
+        form label, form input {
+            display: inline-block;
+            margin: 10px 0 10px 40px;
+            padding: 2px 0;
+        }
+        h1 {
+            width: 340px;
+            display: inline-block;
+            vertical-align: top;
+            border-bottom: 2px solid black;
+        }
+        #wrapper {
+            width: 880px;
+            display: block;
+        }   
+
+        #contacts {
+            width: 220px;
+            display: inline-block;
+            vertical-align: top;  
+            margin-left: 480px;
+        }
+        .card {
+            width: 248px;
+            height: 150px;
+            display: inline-block;            
+            vertical-align: top;
+            border: 1px solid lightgray;
+            background-color: lightgrey;
+            margin-bottom: 10px;
+        } 
+        h2, p {
+            text-align: center;
+        }
+        .back, .front {
+            margin: 5px;
+        }
+        
+    </style>         
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+		"use strict";
+
+		$(document).ready(function(){		
+            $('#submit').click(function(){
+                var username = $('input[name="first-name"]').val() +" "+ $('input[name="last-name"]').val();
+                var description = $('input[name="desc"]').val();                            
+                $('#contacts').append(              
+                    `<div class="card">  
+                        <div class="front">
+                            <h2>${username}</h2>
+                            <p>Click for description!</p>
+                        </div> 
+                        <div class="back" hidden>
+                            <p>${description}</p>
+                        </div>
+                    </div>`);            
+                return false;
+            })
+            $('#contacts').on('click', '.card', function(){
+                console.log($(this));                
+                $(this).children().toggle("slow");
+                return false;
+            })              
+        }) // End of doc ready
+	</script>
+</head>
+<body>	
+    <main>
+        <div id="wrapper">
+            <form> 
+                <h1>Add User</h1>
+                <label>First Name: </label> 
+                <input type="text" name="first-name">
+                <label>Last Name: </label>
+                <input type="text" name="last-name">
+                <label>Description: </label>
+                <input type="textarea" name="desc">
+                <br>
+                <input id="submit" type="submit" value=" Add User ">
+            </form> 
+            <div id="contacts">                          
+            </div>        
+        </div>                  
+    </main>
+</body>
+</html>
